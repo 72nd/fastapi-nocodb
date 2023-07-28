@@ -1,11 +1,12 @@
+from attr import validate
 from .config import settings
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 from datetime import datetime
 
 from nocodb.nocodb import APIToken, NocoDBProject, WhereFilter
 from nocodb.infra.requests_client import NocoDBRequestsClient
-from pydantic import BaseModel, Field, RootModel
+from pydantic import BaseModel, ConfigDict, Field, FieldValidationInfo, model_validator, RootModel
 
 
 def get_nocodb_client() -> NocoDBRequestsClient:
@@ -39,12 +40,11 @@ class NocoPerson(BaseModel):
 
 
 class NocoPersons(RootModel[list[NocoPerson]]):
-    TABLE_NAME = "Person"
     root: list[NocoPerson]
 
     @classmethod
     def from_nocodb(cls):
-        raw = get_nocodb_data(cls.TABLE_NAME)
+        raw = get_nocodb_data("Person")
         return cls.model_validate(raw["list"])
 
 
@@ -53,13 +53,26 @@ class NocoCourse(BaseModel):
     created_at: datetime = Field(alias="CreatedAt")
     updated_at: datetime = Field(alias="UpdatedAt")
     name: str = Field(alias="Name")
+    students: Optional[NocoPersons] = None
+
+    @model_validator(mode="after")
+    def load_linked_students(self):
+        client = get_nocodb_client()
+        raw = client.table_row_nested_relations_list(
+            get_nocodb_project(),
+            "Course",
+            "mm",
+            self.noco_id,
+            "Students"
+        )
+        self.students = NocoPersons.model_validate(raw["list"])
+        return self
 
 
 class NocoCourses(RootModel[list[NocoPerson]]):
-    TABLE_NAME = "Course"
-    root: list[NocoPerson]
+    root: list[NocoCourse]
 
     @classmethod
     def from_nocodb(cls):
-        raw = get_nocodb_data(cls.TABLE_NAME)
-        return cls.model_validate(raw["list"])
+        raw = get_nocodb_data("Course")
+        return cls.model_validate(raw["list"], strict=False)

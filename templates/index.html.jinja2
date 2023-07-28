@@ -1,12 +1,57 @@
 {% extends "base.html.jinja2" %}
 {% block content %}
-<div class="content">
+<div x-data="data()" x-init="fetch_data()">
     <section class="section">
-        <h1>Hilfe</h1>
-        <p>Wir haben dir hier die wichtigsten Informationen rund um unser neues Uploadportal für Radiosendungen zusammengetragen.</p>
-
-        <h2>Persönlicher Link</h2>
-        <p>Um den Radioupload verwenden zu können, bennötigst du einen personalisierten Link. Dieser erhälst du von unserer Sendeabwicklung. Mit diesem Link kannst du für alle Formate, welche du bei uns produzierst neue Episoden hochladen. Dadurch das die Links personalisiert sind können wir sicherstellen, dass nur du für deine Sendung(en) Dateien hochladen kannst.</p>
+        <div class="notification is-warning" x-show="!is_data_loaded && !fetch_error">
+            Bitte warten, die Daten werden geladen...
+        </div>
+        <template x-if="fetch_error">
+            <div class="notification is-danger" x-show="fetch_error">
+                <p><b>Error while fetching data (Error <span x-text="fetch_error.status"></span>)</b>
+                <p class="is-size-7">Details: <span x-text="fetch_error_detail"></span>.</p>
+            </div>
+        </template>
+        <h1 class="title">Persons</h1>
+        <div x-show="is_data_loaded">
+            <template x-for="course in courses">
+                <div>
+                    <h2 class="subtitle"><span x-text="course.name"></span></h2>
+                    <template x-for="student in course.students">
+                        <p class="paragraph"><span x-text="student.name"></span>, <span x-text="student.age"></span> years old.</p>
+                    </template>
+                </div>
+            </template>
+        </div>
     </section>
 </div>
+{% endblock %}
+{% block script_footer %}
+<script>
+    function data() {
+        return {
+            is_data_loaded: false,
+            fetch_error: null,
+            fetch_error_detail: "",
+            courses: null,
+
+            fetch_data() {
+                fetch("api/course")
+                    .then(res => {
+                        if (!res.ok) {
+                            this.fetch_error = res;
+                        }
+                        return res.json();
+                    })
+                    .then(data => {
+                        if (this.fetch_error === null) {
+                            this.is_data_loaded = true;
+                            this.courses = data;
+                        } else if ("detail" in data) {
+                            this.fetch_error_detail = data.detail;
+                        }
+                    });
+            },
+        }
+    }
+</script>
 {% endblock %}
