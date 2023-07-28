@@ -1,5 +1,8 @@
 [project]
 port = 8000
 proxy_headers = true
+nocodb_url = "https://noco.1-2-wir.org"
+nocodb_org_name = "noco"
+project_name = "Test Project"
 log_level = "INFO"
 dev_mode = true

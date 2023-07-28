@@ -7,6 +7,12 @@ class Settings:
     """Port for the web-server"""
     proxy_headers: bool
     """Whether Uvicorn should provide proxy headers"""
+    nocodb_url: str
+    """URL of NocoDB instance."""
+    nocodb_org_name: str
+    """Org name of NocoDB, most of the time `noco`."""
+    project_name: str
+    """Name of the NocoDB project."""
     log_level: str
     """Logging level for the application."""
     dev_mode: bool
