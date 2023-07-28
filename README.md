@@ -4,7 +4,7 @@ This template provides the my default structure for **small** web projects. The 
 
 - [FastAPI](https://fastapi.tiangolo.com/) as the web framework
 - The [NocoDB]() API for data storage using [python-nocodb](https://github.com/ElChicoDePython/python-nocodb)
-- [Dynaconf](https://www.dynaconf.com/) for the configuration management
+- [Typed Settings](https://typed-settings.readthedocs.io) for the configuration management
 - [Typer](https://typer.tiangolo.com/) for the CLI
 - [Pydantic](https://docs.pydantic.dev) for data validation and (de-)serialization
 - [Alpine.js](https://alpinejs.dev/) as the frontend Javascript framework
@@ -14,9 +14,12 @@ This template provides the my default structure for **small** web projects. The 
 ## Setup after cloning
 
 1. Modify the `pyproject.toml`
-2. Modify the `settings.toml`
-3. Adapt your models in `PACKAGE_NAME/models.py`
-4. Document the NocoDB model in the Readme
+2. Modify the `settings.toml` make sure to modify `[project]` to the name of your application
+2. Modify the `.secrets.toml` make sure to modify `[project]` to the name of your application
+4. Modify `appname` in `PACKAGE_NAME/config.py`
+5. Adapt your models in `PACKAGE_NAME/models.py`
+6. Document the NocoDB model in the Readme
+7. Use a [Favicon Generator](https://realfavicongenerator.net/) and copy the output into `static/img`
 
 
 ## Installation

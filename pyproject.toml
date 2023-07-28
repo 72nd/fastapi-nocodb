@@ -7,12 +7,12 @@ description = "DESCRIPTION"
 version = "0.1.0"
 dependencies = [
     "click",
-    "dynaconf",
     "fastapi",
     "Jinja2",
     "nocodb>=2.0.0a2",
     "uvicorn",
     "pydantic",
+    "typed-settings",
     "typer",
 ]
 
@@ -20,4 +20,4 @@ dependencies = [
 packages = ["project"]
 
 [project.scripts]
-rafo = "project:__main__.main"
+project = "project:__main__.app"
