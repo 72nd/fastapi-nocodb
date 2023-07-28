@@ -1,0 +1,23 @@
+[project]
+name = "project"
+authors = [
+    {name = "NAME", email = "NAME@example.com"}
+]
+description = "DESCRIPTION"
+version = "0.1.0"
+dependencies = [
+    "click",
+    "dynaconf",
+    "fastapi",
+    "Jinja2",
+    "nocodb>=2.0.0a2",
+    "uvicorn",
+    "pydantic",
+    "typer",
+]
+
+[tool.setuptools]
+packages = ["project"]
+
+[project.scripts]
+rafo = "project:__main__.main"
