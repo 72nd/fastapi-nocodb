@@ -6,6 +6,14 @@
     <title>Project</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
+    <link rel="apple-touch-icon" sizes="180x180" href="static/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="static/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="static/img/favicon-16x16.png">
+    <link rel="manifest" href="static/img/site.webmanifest">
+    <link rel="mask-icon" href="static/img/safari-pinned-tab.svg" color="#5bbad5">
+    <meta name="msapplication-TileColor" content="#da532c">
+    <meta name="theme-color" content="#ffffff">
+
     <link href="static/css/bulma.min.css" rel="stylesheet" />
     <link href="static/css/fontawesome.min.css" rel="stylesheet" />
     <link href="static/css/regular.min.css" rel="stylesheet" />
@@ -19,7 +27,8 @@
             <a class="navbar-item" href="#">
                 <img src="static/img/logo.svg" alt="Hedylogos Editor" width="112" height="28">
             </a>
-            <div :class="['navbar-burger', is_open ? 'is-active' : '']" role="button" data-target="navbar" @click="is_open= !is_open">
+            <div :class="['navbar-burger', is_open ? 'is-active' : '']" role="button" data-target="navbar"
+                @click="is_open= !is_open">
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
                 <span aria-hidden="true"></span>
