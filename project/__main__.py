@@ -10,10 +10,13 @@ app = typer.Typer()
 @app.command()
 def run():
     print(settings)
-    # uvicorn.run(
-    #     "project.server:app",
-    #     reload=settings.dev_mode,
-    # )
+    uvicorn.run(
+        "project.server:app",
+        reload=settings.dev_mode,
+        port=settings.port,
+        proxy_headers=settings.proxy_headers,
+        log_level=settings.log_level.lower(),
+    )
 
 
 def main():

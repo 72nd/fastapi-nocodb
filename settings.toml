@@ -1,2 +1,5 @@
 [project]
+port = 8000
+proxy_headers = true
+log_level = "INFO"
 dev_mode = true

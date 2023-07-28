@@ -9,11 +9,11 @@ dependencies = [
     "click",
     "fastapi",
     "Jinja2",
-    "nocodb>=2.0.0a2",
-    "uvicorn",
+    "nocodb@git+https://github.com/alex-berlin-tv/python-nocodb.git#egg=relation_create",
     "pydantic",
     "typed-settings",
     "typer",
+    "uvicorn",
 ]
 
 [tool.setuptools]
