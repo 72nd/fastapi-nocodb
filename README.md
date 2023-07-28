@@ -20,6 +20,7 @@ This template provides the my default structure for **small** web projects. The 
 5. Adapt your models in `PACKAGE_NAME/models.py`
 6. Document the NocoDB model in the Readme
 7. Use a [Favicon Generator](https://realfavicongenerator.net/) and copy the output into `static/img`
+8. Modify the metadata in the header of `templates/base.html.jinja2`
 
 
 ## Installation
